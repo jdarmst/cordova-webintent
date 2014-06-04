@@ -98,6 +98,12 @@ public class WebIntent extends CordovaPlugin {
                     callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR));
                     return false;
                 }
+            } else if (action.equals("getExtras")) {
+                Intent i = ((CordovaActivity)this.cordova.getActivity()).getIntent();
+		Set<String> keys = i.getExtras().keySet();
+                callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, JSONArray(keys)));
+		return true;
+            }
             } else if (action.equals("getUri")) {
                 if (args.length() != 0) {
                     //return new PluginResult(PluginResult.Status.INVALID_ACTION);
